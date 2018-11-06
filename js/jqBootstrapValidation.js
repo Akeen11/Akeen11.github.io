@@ -16,7 +16,7 @@
     options: {
       prependExistingHelpBlock: false,
       sniffHtml: true, // sniff for 'required', 'maxlength', etc
-      preventSubmit: true, // stop the form submit event from firing if validation fails
+      preventSubmit: false, // stop the form submit event from firing if validation fails
       submitError: false, // function called if there is an error when trying to submit
       submitSuccess: false, // function called just before a successful submit event is sent to the server
       semanticallyStrict: false, // set to true to tidy up generated HTML output
@@ -62,20 +62,6 @@
 
           $inputs.trigger("validationLostFocus.validation");
 
-          if (warningsFound) {
-            if (settings.options.preventSubmit) {
-              e.preventDefault();
-            }
-            $form.addClass("error");
-            if ($.isFunction(settings.options.submitError)) {
-              settings.options.submitError($form, e, $inputs.jqBootstrapValidation("collectErrors", true));
-            }
-          } else {
-            $form.removeClass("error");
-            if ($.isFunction(settings.options.submitSuccess)) {
-              settings.options.submitSuccess($form, e);
-            }
-          }
         });
 
         return this.each(function() {
